@@ -1,0 +1,306 @@
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Guía de Supervivencia para la IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful (Adapted for Professionalism) -->
+    <!-- Application Structure Plan: La infografía está diseñada como un viaje narrativo de una sola página. Comienza con un gancho visual (el dato del 80%), luego contextualiza el problema (Ecosistema Digital). A continuación, desglosa la tecnología con una línea de tiempo interactiva (Evolución de los LLM) para fomentar la exploración. Luego, presenta los riesgos de forma clara y visual. Finalmente, ofrece la solución práctica a través de un "Decálogo" en formato de acordeón, que permite al usuario digerir la información a su propio ritmo. Esta estructura guía al usuario desde el problema general hasta las soluciones específicas de una manera lógica y atractiva, priorizando la usabilidad sobre la estructura lineal del informe original. -->
+    <!-- Visualization & Content Choices: 
+        - Dato del 80%: Report Info (80% de las comunicaciones mediadas) -> Goal (Informar/Enganchar) -> Viz (Gráfico de Donut) -> Interaction (Tooltip) -> Justification (Un gráfico de donut es ideal para mostrar una proporción simple de forma visualmente impactante al inicio) -> Library (Chart.js, Canvas).
+        - Evolución de los LLM: Report Info (Las 5 etapas) -> Goal (Mostrar Cambio/Proceso) -> Viz (Línea de tiempo horizontal interactiva) -> Interaction (Click para revelar detalles de cada etapa) -> Justification (Transforma una lista estática en una experiencia de descubrimiento, mejorando la retención) -> Method (HTML/CSS/JS).
+        - Riesgos de la IA: Report Info (Alucinaciones, Sesgos, etc.) -> Goal (Organizar/Comparar) -> Viz (Tarjetas con iconos Unicode) -> Interaction (Estática para claridad) -> Justification (Los iconos y el texto breve permiten una rápida asimilación de los conceptos clave) -> Method (HTML/CSS, Unicode).
+        - Decálogo de la Biblioteca: Report Info (Los 10 pasos de verificación) -> Goal (Organizar/Informar) -> Viz (Acordeón interactivo) -> Interaction (Click para expandir/colapsar) -> Justification (Perfecto para contenido denso, permite al usuario enfocarse en un paso a la vez sin sentirse abrumado) -> Method (HTML/CSS/JS).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D3D3D;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            border: 1px solid #E5E7EB;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+        .timeline-content {
+            display: none;
+        }
+        .timeline-item.active .timeline-dot {
+            transform: scale(1.5);
+            background-color: #FF6B6B;
+            border-color: #FFFFFF;
+        }
+        .timeline-item.active p {
+            font-weight: 700;
+            color: #FF6B6B;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8 md:py-16">
+
+        <!-- Header -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1A535C] mb-4">Guía de supervivencia para la IA</h1>
+            <p class="text-lg md:text-xl text-[#4ECDC4] font-semibold">No todo lo que brilla es fuente confiable</p>
+            <p class="max-w-3xl mx-auto mt-4 text-base text-gray-600">En un ecosistema digital dominado por la inteligencia artificial, es crucial desarrollar una mirada crítica. Esta guía transforma el informe del Sistema de Bibliotecas en una experiencia interactiva para ayudarte a navegar este nuevo panorama de forma segura y eficaz.</p>
+        </header>
+
+        <!-- Section 1: The Digital Ecosystem -->
+        <section class="mb-20 md:mb-24">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <h2 class="text-3xl font-bold text-[#1A535C] mb-4">El nuevo ecosistema digital</h2>
+                    <p class="mb-4 text-gray-700">El crecimiento exponencial de la comunicación digital ha alterado radicalmente cómo producimos y consumimos información. La IA es la fuerza más disruptiva de este nuevo escenario, lo que nos obliga a adaptar nuestras habilidades de investigación.</p>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><span class="text-xl text-[#FF6B6B] mr-3">➔</span><div><strong class="font-semibold text-gray-800">Nuevas formas de producción:</strong> Todos nos hemos convertido en creadores de contenido.</div></li>
+                        <li class="flex items-start"><span class="text-xl text-[#FF6B6B] mr-3">➔</span><div><strong class="font-semibold text-gray-800">Nuevos comportamientos de uso:</strong> Se requieren nuevas capacidades para navegar la ubicuidad de la información.</div></li>
+                        <li class="flex items-start"><span class="text-xl text-[#FF6B6B] mr-3">➔</span><div><strong class="font-semibold text-gray-800">Impacto socioeconómico:</strong> Profundas consecuencias en la economía y los hábitos sociales.</div></li>
+                    </ul>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-2xl font-bold text-[#1A535C] mb-2">Un mundo mediado</h3>
+                    <p class="text-gray-600 mb-4">Según estudios, un porcentaje abrumador de nuestras comunicaciones diarias ya están mediadas por la tecnología.</p>
+                    <div class="chart-container">
+                        <canvas id="comunicacionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Evolution of LLMs -->
+        <section class="mb-20 md:mb-24">
+            <h2 class="text-3xl font-bold text-center text-[#1A535C] mb-4">La evolución de la IA generativa</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">Para usar una herramienta, hay que entenderla. Explora la increíble evolución de los Grandes Modelos de Lenguaje (LLM) haciendo clic en cada etapa de la línea de tiempo.</p>
+            
+            <div class="w-full">
+                <!-- Timeline Navigation -->
+                <div id="timeline-nav" class="flex justify-between items-start text-center mb-8 relative">
+                    <div class="absolute top-4 left-0 w-full h-1 bg-gray-200 -z-10"></div>
+                     <!-- Timeline Items -->
+                </div>
+                <!-- Timeline Content Display -->
+                <div id="timeline-content-display" class="card min-h-[150px]">
+                    <!-- Content will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Risks -->
+        <section class="mb-20 md:mb-24">
+             <h2 class="text-3xl font-bold text-center text-[#1A535C] mb-4">Navegando los riesgos</h2>
+             <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">Las herramientas de IA son poderosas, pero no infalibles. Conocer sus riesgos inherentes es el primer paso para usarlas de forma responsable y proteger la integridad de tu investigación.</p>
+             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card text-center border-t-4 border-[#FF6B6B]">
+                    <div class="text-5xl mb-4">🤯</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Alucinaciones</h3>
+                    <p class="text-sm text-gray-600">La IA puede inventar datos, citas o referencias que parecen reales pero son falsas.</p>
+                </div>
+                <div class="card text-center border-t-4 border-[#FF6B6B]">
+                    <div class="text-5xl mb-4">⚖️</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Sesgos algorítmicos</h3>
+                    <p class="text-sm text-gray-600">Los modelos pueden reflejar sesgos ideológicos o culturales de sus datos de entrenamiento.</p>
+                </div>
+                <div class="card text-center border-t-4 border-[#FF6B6B]">
+                    <div class="text-5xl mb-4">📝</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Plagio involuntario</h3>
+                    <p class="text-sm text-gray-600">Puede reproducir fragmentos de texto sin la cita adecuada, llevando al plagio.</p>
+                </div>
+                <div class="card text-center border-t-4 border-[#FF6B6B]">
+                    <div class="text-5xl mb-4">🔗</div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2">Pérdida de trazabilidad</h3>
+                    <p class="text-sm text-gray-600">A menudo es difícil rastrear el origen exacto de una afirmación, complicando la verificación.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Decalogue -->
+        <section>
+            <h2 class="text-3xl font-bold text-center text-[#1A535C] mb-4">El decálogo de supervivencia</h2>
+            <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">El Sistema de Bibliotecas ha creado 10 estrategias prácticas para verificar la información generada por IA. Usa este kit de herramientas para una investigación crítica y responsable.</p>
+            <div id="accordion-container" class="max-w-4xl mx-auto space-y-3">
+                <!-- Accordion items will be generated here by JS -->
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#1A535C] text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4 text-[#4ECDC4]">Tu aliado en la investigación</h3>
+            <p class="max-w-3xl mx-auto text-gray-300 mb-6">El Sistema de Bibliotecas está aquí para apoyarte. Accede a nuestros recursos suscritos de forma sencilla a través de la <strong>App MyLoft</strong> y potencia tu investigación. Si necesitas asistencia personalizada o quieres profundizar tus habilidades, no dudes en contactarnos o solicitar una capacitación.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6Q9ZV4_1a0Ucv4g1wXDi57t9Xi8qoyEypi3M6EYST3JbDSw/viewform" target="_blank" class="inline-block bg-[#FF6B6B] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#FF8C8C] transition-colors shadow-lg">Solicitar Capacitación</a>
+            <p class="text-sm text-gray-400 mt-8">&copy; 2025 Sistema de Bibliotecas. Guía de supervivencia para la investigación en la era de la IA.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Chart.js Donut Chart
+    const ctx = document.getElementById('comunicacionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Comunicaciones mediadas', 'Otras'],
+            datasets: [{
+                label: '% de Comunicaciones',
+                data: [80, 20],
+                backgroundColor: ['#4ECDC4', '#FFE66D'],
+                borderColor: ['#FFFFFF', '#FFFFFF'],
+                borderWidth: 4,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#3D3D3D',
+                        font: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        },
+                        label: function(context) {
+                            return `${context.raw}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Timeline Data and Setup
+    const timelineData = [
+        { year: '2022', title: 'Etapa 1: Conocimiento estático', content: 'Los modelos iniciales como ChatGPT estaban entrenados con datasets fijos. Su principal limitación era la incapacidad de acceder a información o eventos posteriores a su fecha de corte.' },
+        { year: '2023', title: 'Etapa 2: Conexión al mundo real', content: 'Las IA comenzaron a conectarse a internet y a bases de datos en tiempo real. Esto les permitió contextualizar la información histórica con desarrollos recientes y proporcionar respuestas actualizadas.' },
+        { year: '2024', title: 'Etapa 3: Razonamiento mejorado', content: 'Los modelos comenzaron a priorizar la calidad y la lógica de la respuesta sobre la velocidad. Mostraban su "proceso de pensamiento", lo que redujo las alucinaciones y mejoró su fiabilidad.' },
+        { year: 'Actual', title: 'Etapa 4: Investigación profunda', content: 'Los "Deep Research Models" consultan múltiples fuentes, verifican información y realizan mapeos conceptuales. Usan técnicas como RAG para acceder a datos verificables y reducir invenciones.' },
+        { year: 'Futuro', title: 'Etapa 5: Agentes de investigación', content: 'Se espera que las IA funcionen como agentes autónomos capaces de realizar investigaciones completas, desde formular hipótesis hasta colaborar con otras IA y realizar revisiones por pares.' }
+    ];
+
+    const timelineNav = document.getElementById('timeline-nav');
+    const contentDisplay = document.getElementById('timeline-content-display');
+
+    timelineData.forEach((item, index) => {
+        const navItem = document.createElement('div');
+        navItem.className = 'timeline-item flex-1 cursor-pointer';
+        navItem.dataset.index = index;
+        navItem.innerHTML = `
+            <div class="timeline-dot w-8 h-8 mx-auto rounded-full bg-white border-4 border-gray-300 transition-all duration-300"></div>
+            <p class="mt-2 text-sm font-medium text-gray-500 transition-all duration-300">${item.year}</p>
+        `;
+        timelineNav.appendChild(navItem);
+    });
+
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    function updateTimeline(index) {
+        timelineItems.forEach((item, i) => {
+            item.classList.toggle('active', i == index);
+        });
+        const activeData = timelineData[index];
+        contentDisplay.innerHTML = `
+            <h3 class="font-bold text-lg text-[#1A535C]">${activeData.title}</h3>
+            <p class="mt-2 text-gray-600">${activeData.content}</p>
+        `;
+    }
+
+    timelineNav.addEventListener('click', (e) => {
+        const targetItem = e.target.closest('.timeline-item');
+        if (targetItem) {
+            updateTimeline(targetItem.dataset.index);
+        }
+    });
+    
+    updateTimeline(0);
+
+    // Accordion Data and Setup
+    const accordionContainer = document.getElementById('accordion-container');
+    const decalogoData = [
+        { title: "1. Rastreo de fuentes", content: "Pregunte a la IA de dónde obtuvo la información. Valide que contenga citas claras y enlaces activos. Desconfíe de afirmaciones vagas sin respaldo explícito." },
+        { title: "2. Chequeo bibliográfico", content: "Confirme la existencia y veracidad de las referencias. Utilice los recursos suscritos por el Sistema de Bibliotecas, como <strong>Scopus</strong>, a los que puede acceder fácilmente a través de la <strong>App MyLoft</strong>, además de Google Scholar. Verifique el DOI con Crossref." },
+        { title: "3. Lógica de las citas y contenido", content: "Evalúe si las referencias son pertinentes. No basta con que sean reales; deben guardar relación lógica con el tema y aportar evidencia concreta." },
+        { title: "4. Chequeo digital y fact-checking", content: "Para datos concretos (fechas, cifras), use herramientas profesionales como Google Fact Check Explorer, Chequeado.com, o Maldita.es." },
+        { title: "5. Triangulación", content: "Cruce información desde múltiples perspectivas: combine fuentes académicas e institucionales, use IA especializadas (Consensus, Elicit), y realice búsquedas en bases de datos de la biblioteca, accesibles vía <strong>MyLoft</strong>." },
+        { title: "6. Comparación entre modelos", content: "Formule la misma consulta en distintas IA. La coincidencia aumenta la probabilidad de veracidad; la divergencia exige una investigación más profunda." },
+        { title: "7. Backtracking (Trazabilidad inversa)", content: "Solicite a la IA que explique su razonamiento paso a paso para detectar deducciones sin fundamento, saltos lógicos o generalizaciones." },
+        { title: "8. Detección de sesgos", content: "Analice si el contenido presenta preferencias ideológicas, políticas o estereotipos. Esto exige un análisis crítico y contextualizado de la información." },
+        { title: "9. Protocolo anti-plagio", content: "Verifique si el contenido reproduce fragmentos de otras fuentes sin citar. Utilice <strong>Turnitin</strong>, herramienta suscrita por la biblioteca y disponible a través de <strong>MyLoft</strong>, para evaluar la integridad académica." },
+        { title: "10. Revisión humana experta", content: "La última línea de defensa es su criterio profesional. Consulte a la biblioteca o a expertos para validar contenidos. La IA no reemplaza el pensamiento crítico." }
+    ];
+
+    decalogoData.forEach(item => {
+        const accordionItem = document.createElement('div');
+        accordionItem.className = 'card overflow-hidden';
+        accordionItem.innerHTML = `
+            <button class="accordion-button w-full flex justify-between items-center text-left">
+                <span class="font-semibold text-lg text-[#1A535C]">${item.title}</span>
+                <span class="accordion-icon transition-transform transform text-2xl text-[#FF6B6B]">+</span>
+            </button>
+            <div class="accordion-content">
+                <div class="pt-4 text-gray-600">
+                    ${item.content}
+                </div>
+            </div>
+        `;
+        accordionContainer.appendChild(accordionItem);
+    });
+
+    accordionContainer.addEventListener('click', (e) => {
+        const button = e.target.closest('.accordion-button');
+        if (!button) return;
+
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.accordion-icon');
+        const isOpen = content.style.maxHeight !== '0px';
+
+        document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
+        document.querySelectorAll('.accordion-icon').forEach(i => { i.textContent = '+'; i.classList.remove('rotate-45'); });
+
+        if (!isOpen) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.textContent = '-';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
